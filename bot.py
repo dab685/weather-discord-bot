@@ -3,6 +3,9 @@
 import requests
 import discord
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 weather_api_key = os.getenv('WEATHER_API_KEY')
 discord_bot_token = os.getenv('DISCORD_BOT_TOKEN')
@@ -12,10 +15,14 @@ weather_url = f"http://api.openweathermap.org/data/2.5/weather?zip={zipcode}&app
 response = requests.get(weather_url)
 data = response.json()
 
+print(data)
+
 weather_description = data['weather'][0]['description']
 temperature = data['main']['temp'] # in Fahrenheit
 
-client = discord.Client()
+intents = discord.Intents.default()
+
+client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
