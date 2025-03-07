@@ -22,5 +22,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run script
+      - name: Run the bot
+        env:
+            DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}  # Pass the secret as an environment variable
+            WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: python bot.py
